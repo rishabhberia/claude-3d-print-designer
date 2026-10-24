@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "3d-print-designer",
+  "description": "Design 3D prints with Claude Code: CadQuery CAD, automatic checks, ready-to-print Bambu Studio projects and an interactive 3D assembly page.",
+  "owner": {
+    "name": "rishabhberia"
+  },
+  "plugins": [
+    {
+      "name": "3d-print-designer",
+      "description": "Design anything for your 3D printer: parametric CadQuery CAD, collision/overhang/screw checks, multi-plate Bambu Studio projects with real slicer numbers, and a 3D web page with a step-by-step assembly guide.",
+      "source": "./plugins/3d-print-designer",
+      "category": "productivity"
+    }
+  ]
+}
