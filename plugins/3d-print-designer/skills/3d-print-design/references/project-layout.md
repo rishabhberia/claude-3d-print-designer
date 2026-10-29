@@ -29,10 +29,16 @@ Run order: `build.py` → `check.py` → `overhang.py` → `export.py` → `plat
 ## What each step must do
 
 - **params.py:** drawings, solids and checks import the same values, so they can't disagree.
-  Every value that came from a measurement says so in a comment (who, when).
+  Every value that came from a measurement says so in a comment (who, when). Measurements
+  that must add up are checked here with assertions that raise, so a conflict stops the
+  build.
+- **lib.py:** a helper raises on input it can't build (e.g. a MultiPolygon passed where one
+  Polygon is expected) instead of silently returning nothing; a vanished cut shows up later
+  as a false clash.
 - **parts.py:** parts are built where they sit in the assembly. The print rotation is applied
   only at export. That makes collision checks and the assembly animation free.
-- **build.py:** every part has an ID (`A-1`, `JS-2`…), a print rotation and a colour.
+- **build.py:** clears its output folders first (a stale mesh from an older design once
+  produced a false 21,000 mm³ clash). Every part has an ID (`A-1`, `JS-2`…), a print rotation and a colour.
 - **check.py** (each rule with a negative control):
   1. pairwise interference between all parts (volume of intersection > a small tolerance);
   2. each part is one valid solid;
@@ -41,6 +47,10 @@ Run order: `build.py` → `check.py` → `overhang.py` → `export.py` → `plat
      open air to the insert, head and tool room;
   5. moving parts: sweep the full motion range and check clearance at each step;
   6. project-specific rules (e.g. a weighing tray touches only the load cell).
+
+  A negative control that **isn't** caught may mean the feature is unnecessary, not that the
+  checker is blind. Prove the checker with a case that must fail, then document the feature
+  as margin.
 - **overhang.py:** per part, down-facing area > 45° off the bed and bridge spans; compare all
   six axis-aligned orientations; print a table.
 - **export.py:** dedupe by **face fingerprint in print orientation** (volume alone merges mirror

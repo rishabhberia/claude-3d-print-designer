@@ -31,6 +31,15 @@ is code, so a design change is one edit in `params.py` and a rebuild.
 - **Never guess a dimension.** List every size the design depends on, ask the user to measure
   it with calipers, and keep a "measured vs assumed" table in the project README. An assumed
   value is labelled `assumed - CHECK` and stays on the list until measured.
+- **Measurements must add up before you design.** For every number, write down where it was
+  taken from and to, inside or outside, and with a ruler or calipers. Check every sum the
+  geometry implies: outer diameter = inner diameter + 2 × the radial space, overall width =
+  inside gap + 2 × wall. If any sum fails, or a phrase could mean two things ("inside clear
+  space", "distance between the ends"), **ask before designing or printing**. Never pick one
+  reading or derive a value silently. Write the sums into `params.py` as assertions, so a
+  conflict stops the build.
+- **Measure the space a part fills directly** (e.g. surface to rim). Don't derive it from two
+  other readings: a derived 59 mm was really 55, and a whole plate printed too deep.
 - **Real numbers only.** Print time and grams come from the slicer. Any estimate is labelled
   as an estimate. Missing data is reported as missing, never as zero.
 - **Every check gets a negative control.** Before reporting "all clear", show that the check
@@ -50,7 +59,8 @@ is code, so a design change is one edit in `params.py` and a rebuild.
 
 1. **Brief.** What it does, where it sits, what it holds or fixes to, colours, hardware the
    user already owns, which nozzle(s) they have.
-2. **Measure.** Send the measurement list. Photos on a 10 mm cutting mat are fine for
+2. **Measure.** Send the measurement list, then show the readings back as a table with the
+   sum checks each one passes, and ask about every mismatch, even 0.5 mm. Photos on a 10 mm cutting mat are fine for
    outlines, not for sizes (paper sheets read ~5 % off). Anything asymmetric gets a
    handedness check against a photo: mirror-image parts are an easy, costly mistake.
 3. **Options.** Render 2–3 options side by side, including downsides. Wait for the choice.

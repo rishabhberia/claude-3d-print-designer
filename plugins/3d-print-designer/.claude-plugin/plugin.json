@@ -1,6 +1,6 @@
 {
   "name": "3d-print-designer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Design anything for your 3D printer: parametric CadQuery CAD, automatic checks, multi-plate Bambu Studio projects with real slicer numbers, and an interactive 3D assembly page.",
   "author": {
     "name": "rishabhberia"

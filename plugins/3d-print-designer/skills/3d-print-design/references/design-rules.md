@@ -48,6 +48,19 @@ them with the user's own results as they come in and note the date.
 - Keep fixings out of cable channels. Screw into solid features, never into lattice crossings.
 - Removable panels on locating tabs plus magnets beat printed hinges: PLA creeps and sags.
 
+## Moving parts
+
+- **A pivot far from a curved wall magnifies interference.** A part that swings about a pin
+  near its outer edge moves almost tangent to an inner curved wall. A fraction of a mm of
+  radial interference then holds it degrees open, and the free end stands many mm off.
+  A closed-pose collision check can't see this. Compute the **closing stop angle** (2D: rotate
+  the outline towards closed until it first touches the obstacle) against an obstacle a
+  little bigger than measured, and require 0°.
+- Leave ≥ 1.5 mm where the obstacle's size came from a ruler or a photo, not calipers.
+- **Don't widen a part to close a gap seen on a part that isn't seated.** Find what holds it
+  open first.
+- Check a downloaded mechanism over its full motion before changing it (see Measuring).
+
 ## Fits and bed
 
 - Clearances: sliding 0.40 mm, general 0.30 mm, panel-to-panel 0.35 mm, rebate 0.30 mm.
@@ -71,6 +84,12 @@ them with the user's own results as they come in and note the date.
 - Tall thin walls print solid: thin walls and ribs (1.6 mm) and thicken only at fixings.
 - Fine lattices cost time (thousands of short moves).
 - Weigh a redesign with a one-part slice before and after; CAD volume misleads.
+- **Small vertical ribs are slow.** 20 rib islands (1.2 × 1.2 mm, full height) on a box's
+  walls added 45 % to its print time: every layer gets many tiny perimeters. Half-height ribs
+  cost about half that. Slice the variants and let the user choose with real numbers. Rib
+  pairs of that size print cleanly with a 0.4 mm nozzle, no supports.
+- **Partitions in a wedge or round box:** put the slots on radial lines. Every radial line is
+  the same length, so one insert fits every slot; concentric dividers need a part per radius.
 
 ## Measuring
 
@@ -78,5 +97,17 @@ them with the user's own results as they come in and note the date.
   checked against at least one caliper value.
 - Anything asymmetric measured from a photo gets a handedness check: overlay the outline on
   the photo in the same frame. State each coordinate frame's handedness in its docstring.
+- **Ask how thick the material is at the hole**, not "the wall thickness": a recess round a
+  hole can leave far less than the nominal wall.
+- "Distance between the two round ends" can be centre to centre or edge to edge. Ask for
+  centre to centre and cross-check against a photo scaled by a known size.
+- If the user didn't understand a question ("recess depth"), it is still open. Ask again as a
+  measurement they can take, and keep the risky dimension short of the nominal value.
+- **Use the host object's own features before adding parts** (existing holes as hinges, a
+  dip that lets a cap sit flush). Asking first removed four parts and about three hours of
+  print time on one project.
+- **Modular means per unit.** For a stack of identical units, design the alignment piece
+  first, as one identical interlocking part per unit, and aim for one plate per unit that is
+  simply reprinted.
 - A downloaded mechanism (print-in-place hinge etc.): check it for built-in interference over
   its **full** motion before changing it, and check the new full range after.
